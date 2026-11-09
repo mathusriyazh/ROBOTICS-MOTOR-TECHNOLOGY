@@ -1,0 +1,544 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Robotics Motors – Interactive Learning Module</title>
+<style>
+:root{
+ --bg:#07111e;--panel:#101f31;--panel2:#162a40;
+ --cyan:#38d9ff;--green:#45e0a2;--orange:#ffb454;
+ --red:#ff647c;--text:#e9f3ff;--muted:#9eb2c9;
+ --border:#294158;
+}
+*{box-sizing:border-box}
+body{
+ margin:0;background:var(--bg);color:var(--text);
+ font-family:Arial,sans-serif;line-height:1.6
+}
+header{
+ padding:32px 20px;text-align:center;
+ background:linear-gradient(120deg,#102d4a,#07111e,#17334b);
+ border-bottom:2px solid var(--cyan)
+}
+header h1{font-size:clamp(25px,4vw,38px);color:var(--cyan)}
+header p{color:var(--muted)}
+nav{
+ display:flex;flex-wrap:wrap;justify-content:center;gap:8px;
+ padding:14px;background:#0c1b2b;position:sticky;top:0;z-index:5
+}
+nav a{
+ color:var(--cyan);text-decoration:none;border:1px solid var(--border);
+ padding:8px 13px;border-radius:7px;font-size:13px
+}
+nav a:hover{background:#18354d}
+.container{max-width:1200px;margin:auto;padding:20px}
+section{margin:28px 0;scroll-margin-top:90px}
+h2{color:var(--cyan);border-bottom:1px solid var(--border);padding-bottom:9px}
+h3{color:var(--green)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.card{
+ background:var(--panel);border:1px solid var(--border);
+ border-radius:12px;padding:18px;transition:.25s
+}
+.card:hover{transform:translateY(-4px);border-color:var(--cyan)}
+.motor-icon{
+ height:125px;display:flex;align-items:center;justify-content:center;
+ font-size:76px;background:radial-gradient(circle,#193a53,#101f31);
+ border-radius:10px;margin-bottom:12px
+}
+.tag{display:inline-block;background:#153a50;color:var(--cyan);
+ padding:4px 9px;border-radius:20px;font-size:12px}
+table{width:100%;border-collapse:collapse;background:var(--panel);font-size:14px}
+th,td{padding:12px;text-align:left;border:1px solid var(--border)}
+th{background:#18334c;color:var(--cyan)}
+tr:hover{background:#172c40}
+input,select{
+ background:#081625;color:white;border:1px solid #41627c;
+ padding:10px;border-radius:6px;width:100%;margin:5px 0 12px
+}
+button{
+ background:var(--cyan);color:#07111e;border:none;
+ border-radius:7px;padding:10px 17px;font-weight:bold;cursor:pointer
+}
+button:hover{background:var(--green)}
+.result{
+ background:#0b2637;border-left:4px solid var(--green);
+ padding:15px;margin-top:12px;border-radius:6px
+}
+.formula{
+ background:#071a2a;color:var(--orange);padding:14px;
+ border-radius:8px;font-family:monospace;overflow-x:auto
+}
+.motor-animation{
+ width:110px;height:110px;border:8px solid var(--cyan);
+ border-radius:50%;margin:auto;position:relative;
+ display:flex;align-items:center;justify-content:center
+}
+.motor-animation:before{
+ content:"";height:90px;width:5px;background:var(--orange);
+ position:absolute;animation:spin 1.5s linear infinite
+}
+.motor-animation:after{
+ content:"";height:5px;width:90px;background:var(--orange);
+ position:absolute;animation:spin 1.5s linear infinite
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+.bar{height:10px;background:#263f53;border-radius:8px;overflow:hidden}
+.bar span{display:block;height:100%;background:var(--green)}
+.quiz-option{
+ display:block;padding:10px;margin:8px 0;
+ border:1px solid var(--border);border-radius:7px;cursor:pointer
+}
+.quiz-option:hover{border-color:var(--cyan)}
+footer{text-align:center;padding:25px;color:var(--muted)}
+.small{font-size:13px;color:var(--muted)}
+</style>
+</head>
+
+
+<!-- Vercel Web Analytics -->
+<script>
+  window.va = window.va || function () {
+    (window.vaq = window.vaq || []).push(arguments);
+  };
+</script>
+
+<!-- Replace <unique-path> with the path provided
+     by Vercel when Web Analytics is enabled -->
+<script defer src="/<unique-path>/script.js"></script>
+</body>
+</html>
+
+
+<body>
+
+<header>
+<h1>ROBOTICS MOTOR TECHNOLOGY</h1>
+<p>Types | Specifications | Power Drives | Applications | Motor Selection</p>
+<p>Interactive Learning Module – Robotics and Artificial Intelligence</p>
+</header>
+
+<nav>
+<a href="#types">Motor Types</a>
+<a href="#comparison">Comparison</a>
+<a href="#specs">Specifications</a>
+<a href="#principles">Working</a>
+<a href="#calculator">Calculator</a>
+<a href="#selection">Selection</a>
+<a href="#drivers">Drivers</a>
+<a href="#quiz">Quiz</a>
+</nav>
+
+<div class="container">
+
+<section id="types">
+<h2>1. Types of Motors Used in Robots</h2>
+<div class="grid">
+
+<div class="card">
+<div class="motor-icon">⚙️</div>
+<h3>DC Geared Motor</h3>
+<span class="tag">Mobile Robots / AGV</span>
+<p>Converts DC electrical energy into rotary mechanical motion. A gearbox reduces speed and increases output torque.</p>
+<ul>
+<li>Voltage: 6–48 V</li>
+<li>Power: 5–500 W</li>
+<li>Output speed: 10–1000 RPM</li>
+<li>Feedback: Encoder optional</li>
+<li>Control: PWM / H-bridge</li>
+</ul>
+</div>
+
+<div class="card">
+<div class="motor-icon">🔄</div>
+<h3>BLDC Motor</h3>
+<span class="tag">Drones / Humanoids</span>
+<p>Uses electronic commutation instead of mechanical brushes. Offers high efficiency and power density.</p>
+<ul>
+<li>Voltage: 12–60 V (small robots)</li>
+<li>Power: 50 W–5 kW+</li>
+<li>Speed: 500–10000+ RPM</li>
+<li>Feedback: Hall / Encoder</li>
+<li>Control: ESC / FOC</li>
+</ul>
+</div>
+
+<div class="card">
+<div class="motor-icon">🎯</div>
+<h3>Servo Motor</h3>
+<span class="tag">Industrial Robotic Arms</span>
+<p>Uses feedback to accurately control position, speed and torque.</p>
+<ul>
+<li>Supply: 24–48 V DC or AC drive systems</li>
+<li>Power: 50 W–5 kW+</li>
+<li>Speed: 1000–6000 RPM</li>
+<li>Feedback: Encoder / Resolver</li>
+<li>Control: Closed-loop PID</li>
+</ul>
+</div>
+
+<div class="card">
+<div class="motor-icon">🔩</div>
+<h3>Stepper Motor</h3>
+<span class="tag">Positioning Systems</span>
+<p>Rotates in discrete angular steps based on input pulses.</p>
+<ul>
+<li>Driver voltage: 12–48 V typical</li>
+<li>Step angle: 1.8° / 0.9°</li>
+<li>Holding torque: 0.1–3 Nm</li>
+<li>Feedback: Optional encoder</li>
+<li>Control: Pulse / Direction</li>
+</ul>
+</div>
+
+<div class="card">
+<div class="motor-icon">↕️</div>
+<h3>Linear Actuator</h3>
+<span class="tag">Lifting / Grippers</span>
+<p>Produces linear motion using a lead screw, belt or electromagnetic mechanism.</p>
+<ul>
+<li>Supply: 12–48 V typical</li>
+<li>Force: 100–10000 N</li>
+<li>Stroke: 50–1000 mm</li>
+<li>Speed: 5–100 mm/s</li>
+<li>Feedback: Limit switch / Encoder</li>
+</ul>
+</div>
+
+<div class="card">
+<div class="motor-icon">⭕</div>
+<h3>Direct-Drive Torque Motor</h3>
+<span class="tag">Humanoid Joints</span>
+<p>Produces high torque at low speed without requiring a conventional gearbox.</p>
+<ul>
+<li>Supply: Drive-dependent</li>
+<li>Power: 50 W–several kW</li>
+<li>Speed: 10–1000 RPM typical</li>
+<li>Feedback: High-resolution encoder</li>
+<li>Control: Servo / FOC</li>
+</ul>
+</div>
+
+</div>
+</section>
+
+<section id="comparison">
+<h2>2. Comparison of Robot Motors</h2>
+<table>
+<tr>
+<th>Motor</th><th>Speed Control</th><th>Position Control</th>
+<th>Torque Characteristics</th><th>Application</th>
+</tr>
+<tr><td>DC</td><td>PWM</td><td>Encoder required</td><td>Good starting torque</td><td>Mobile robots</td></tr>
+<tr><td>BLDC</td><td>Electronic commutation</td><td>Encoder / Hall</td><td>High power density</td><td>Drones</td></tr>
+<tr><td>Servo</td><td>Servo drive</td><td>Closed loop</td><td>Controlled torque</td><td>Robotic arms</td></tr>
+<tr><td>Stepper</td><td>Pulse frequency</td><td>Step-based</td><td>High holding torque</td><td>3D printers</td></tr>
+<tr><td>Linear</td><td>Drive controller</td><td>Sensor feedback</td><td>Linear force</td><td>Grippers</td></tr>
+<tr><td>Torque</td><td>FOC / Servo</td><td>Closed loop</td><td>High low-speed torque</td><td>Humanoids</td></tr>
+</table>
+</section>
+
+<section id="specs">
+<h2>3. Example Motor Specifications</h2>
+<p class="small">Representative example values. Actual specifications vary by manufacturer and model.</p>
+<table>
+<tr><th>Parameter</th><th>NEMA 17</th><th>NEMA 23</th><th>DC Geared</th><th>BLDC</th><th>AC Servo</th></tr>
+<tr><td>Voltage / Driver supply</td><td>12–24 V</td><td>24–48 V</td><td>12 V</td><td>24 V</td><td>220 V AC drive</td></tr>
+<tr><td>Rated current</td><td>1.5 A/phase</td><td>2.8 A/phase</td><td>Model dependent</td><td>Model dependent</td><td>Model dependent</td></tr>
+<tr><td>Rated power</td><td>Varies</td><td>Varies</td><td>Varies</td><td>100 W example</td><td>400 W example</td></tr>
+<tr><td>Speed</td><td>Application dependent</td><td>Application dependent</td><td>100 RPM</td><td>3000 RPM</td><td>3000 RPM</td></tr>
+<tr><td>Torque</td><td>0.4 Nm holding</td><td>2 Nm holding</td><td>0.49 Nm</td><td>0.318 Nm</td><td>1.27 Nm</td></tr>
+<tr><td>Feedback</td><td>Optional</td><td>Optional</td><td>Encoder optional</td><td>Hall</td><td>Encoder</td></tr>
+</table>
+</section>
+
+<section id="principles">
+<h2>4. Motor Working Principle – Animated Demonstration</h2>
+<div class="card">
+<h3>Rotating Motor Shaft</h3>
+<div class="motor-animation"></div>
+<p style="text-align:center">Electrical input → Magnetic field → Electromagnetic torque → Shaft rotation</p>
+<div class="formula">
+DC motor: T ∝ Ia<br>
+Back EMF: Eb = Ke × ω<br>
+Mechanical Power: P = T × ω
+</div>
+</div>
+
+<h3>Control Methods</h3>
+<div class="grid">
+<div class="card">
+<h3>DC Motor – PWM</h3>
+<p>Duty cycle determines average motor voltage.</p>
+<div class="formula">Vavg = D × Vs</div>
+</div>
+<div class="card">
+<h3>BLDC – Electronic Commutation</h3>
+<p>Electronic switching energizes stator phases according to rotor position.</p>
+<div class="formula">FOC: Id / Iq current control</div>
+</div>
+<div class="card">
+<h3>Stepper – Pulse Control</h3>
+<p>Number of pulses determines angular displacement.</p>
+<div class="formula">θ = Np × θstep</div>
+</div>
+<div class="card">
+<h3>Servo – Feedback Control</h3>
+<p>Position error is used by the controller to generate corrective action.</p>
+<div class="formula">e(t) = θref − θactual</div>
+</div>
+</div>
+</section>
+
+<section id="calculator">
+<h2>5. Interactive Motor Power and Torque Calculator</h2>
+<div class="card">
+<h3>Calculate Mechanical Power</h3>
+<label>Motor Torque (Nm)</label>
+<input type="number" id="torque" value="2" min="0" step="0.1">
+<label>Motor Speed (RPM)</label>
+<input type="number" id="speed" value="1500" min="0">
+<button onclick="calculatePower()">Calculate Power</button>
+<div id="powerResult" class="result">Enter values and calculate.</div>
+</div>
+
+<div class="card" style="margin-top:15px">
+<h3>Robot Wheel Torque Calculator</h3>
+<label>Required wheel force (N)</label>
+<input type="number" id="force" value="20" min="0">
+<label>Wheel radius (m)</label>
+<input type="number" id="radius" value="0.1" min="0.001" step="0.01">
+<label>Number of driven wheels</label>
+<input type="number" id="wheels" value="2" min="1" step="1">
+<label>Gearbox efficiency (%)</label>
+<input type="number" id="eff" value="85" min="1" max="100">
+<button onclick="calculateWheel()">Calculate Required Torque</button>
+<div id="wheelResult" class="result">Enter values and calculate.</div>
+</div>
+
+<div class="card" style="margin-top:15px">
+<h3>Gearbox Speed and Torque Calculator</h3>
+<label>Motor speed (RPM)</label>
+<input type="number" id="inputSpeed" value="3000">
+<label>Motor torque (Nm)</label>
+<input type="number" id="inputTorque" value="0.5">
+<label>Gear ratio</label>
+<input type="number" id="gear" value="10" min="0.01">
+<label>Gearbox efficiency (%)</label>
+<input type="number" id="gearEff" value="90" min="1" max="100">
+<button onclick="calculateGear()">Calculate Output</button>
+<div id="gearResult" class="result">Enter values and calculate.</div>
+</div>
+</section>
+
+<section id="selection">
+<h2>6. Interactive Robot Motor Selection</h2>
+<div class="card">
+<label>Select Robot Application</label>
+<select id="application" onchange="selectMotor()">
+<option value="">-- Select Application --</option>
+<option value="DC Geared Motor">Mobile Robot / AGV</option>
+<option value="BLDC Motor">Drone / High-Speed Robot</option>
+<option value="AC Servo Motor">Industrial Robotic Arm</option>
+<option value="Stepper Motor">3D Printer / Positioning</option>
+<option value="BLDC / Torque Motor">Humanoid Robot</option>
+<option value="Linear Actuator">Robotic Gripper / Lifting</option>
+</select>
+<button onclick="selectMotor()">Recommend Motor</button>
+<div id="selectionResult" class="result">Select a robot application.</div>
+</div>
+</section>
+
+<section id="drivers">
+<h2>7. Motor Drivers and Feedback Sensors</h2>
+<div class="grid">
+<div class="card">
+<h3>Motor Drivers</h3>
+<ul>
+<li>DC: BTS7960 / H-bridge</li>
+<li>BLDC: ESC / FOC controller</li>
+<li>Stepper: A4988 / DRV8825 / DM542</li>
+<li>Servo: Manufacturer-specific drive</li>
+<li>Linear: H-bridge / actuator drive</li>
+</ul>
+</div>
+<div class="card">
+<h3>Feedback Sensors</h3>
+<ul>
+<li>Incremental encoder</li>
+<li>Absolute encoder</li>
+<li>Hall effect sensor</li>
+<li>Resolver</li>
+<li>Limit switch</li>
+<li>Current and temperature sensors</li>
+</ul>
+</div>
+<div class="card">
+<h3>Control System</h3>
+<p>Reference input → Controller → Motor driver → Motor → Mechanical load</p>
+<p>Encoder / Hall feedback → Controller</p>
+<div class="formula">Closed-loop control:<br>
+e(t) = Reference − Feedback</div>
+</div>
+</div>
+</section>
+
+<section id="quiz">
+<h2>8. Knowledge Assessment</h2>
+<div class="card">
+<div id="question"></div>
+<div id="options"></div>
+<button onclick="nextQuestion()">Next Question</button>
+<div id="quizResult" class="result">Test your knowledge!</div>
+</div>
+</section>
+
+<section>
+<h2>9. Important Design Considerations</h2>
+<div class="grid">
+<div class="card">
+<h3>Mechanical</h3>
+<p>Payload, inertia, torque, speed, acceleration and gearbox ratio.</p>
+</div>
+<div class="card">
+<h3>Electrical</h3>
+<p>Voltage, current, power, driver rating and battery capacity.</p>
+</div>
+<div class="card">
+<h3>Thermal</h3>
+<p>Winding temperature, cooling, duty cycle and thermal protection.</p>
+</div>
+<div class="card">
+<h3>Control</h3>
+<p>Position feedback, speed feedback, PID, FOC and communication.</p>
+</div>
+</div>
+</section>
+
+</div>
+
+<footer>
+<p>Robotics Actuators and Power Drive Technology</p>
+<p>Interactive Engineering Learning Module</p>
+</footer>
+
+<script>
+function valid(...values){
+ return values.every(v=>Number.isFinite(v));
+}
+
+function calculatePower(){
+ let T=Number(document.getElementById('torque').value);
+ let N=Number(document.getElementById('speed').value);
+ let out=document.getElementById('powerResult');
+ if(!valid(T,N)||T<0||N<0){
+  out.innerHTML="Enter valid non-negative values.";
+  return;
+ }
+ let P=2*Math.PI*N*T/60;
+ out.innerHTML=`<b>Mechanical Power:</b> ${P.toFixed(2)} W
+ <br><b>Power:</b> ${(P/1000).toFixed(3)} kW
+ <br><b>Angular Speed:</b> ${(2*Math.PI*N/60).toFixed(2)} rad/s`;
+}
+
+function calculateWheel(){
+ let F=Number(document.getElementById('force').value);
+ let r=Number(document.getElementById('radius').value);
+ let n=Number(document.getElementById('wheels').value);
+ let e=Number(document.getElementById('eff').value);
+ let out=document.getElementById('wheelResult');
+ if(!valid(F,r,n,e)||F<0||r<=0||!Number.isInteger(n)||n<1||e<=0||e>100){
+  out.innerHTML="Check force, radius, wheel count and efficiency.";
+  return;
+ }
+ let total=F*r;
+ let each=total/n;
+ let motor=each/(e/100);
+ out.innerHTML=`<b>Total wheel torque:</b> ${total.toFixed(3)} Nm
+ <br><b>Torque per wheel:</b> ${each.toFixed(3)} Nm
+ <br><b>Required motor torque per wheel:</b> ${motor.toFixed(3)} Nm`;
+}
+
+function calculateGear(){
+ let N=Number(document.getElementById('inputSpeed').value);
+ let T=Number(document.getElementById('inputTorque').value);
+ let G=Number(document.getElementById('gear').value);
+ let e=Number(document.getElementById('gearEff').value);
+ let out=document.getElementById('gearResult');
+ if(!valid(N,T,G,e)||N<0||T<0||G<=0||e<=0||e>100){
+  out.innerHTML="Enter valid values.";
+  return;
+ }
+ out.innerHTML=`<b>Output speed:</b> ${(N/G).toFixed(2)} RPM
+ <br><b>Output torque:</b> ${(T*G*e/100).toFixed(3)} Nm
+ <br><b>Gear ratio:</b> ${G}:1`;
+}
+
+function selectMotor(){
+ let a=document.getElementById('application').value;
+ let details={
+ "DC Geared Motor":"Recommended for mobile robots and AGVs. Check output torque, wheel speed, gearbox ratio and encoder feedback.",
+ "BLDC Motor":"Recommended for drones and high-speed robots. Check KV rating, rated current, continuous power, ESC and cooling.",
+ "AC Servo Motor":"Recommended for industrial robotic arms. Check rated torque, peak torque, speed, encoder and servo drive.",
+ "Stepper Motor":"Recommended for positioning applications. Check holding torque, phase current, supply and speed-torque curve.",
+ "BLDC / Torque Motor":"Recommended for humanoid joints. Check continuous and peak torque, thermal limits, inertia and feedback.",
+ "Linear Actuator":"Recommended for robotic lifting and gripping. Check force, stroke, speed and duty cycle."
+ };
+ document.getElementById('selectionResult').innerHTML=
+ a ? `<b>Recommended motor:</b> ${a}<br>${details[a]}`:
+ "Please select an application.";
+}
+
+const questions=[
+ {q:"Which motor is commonly used in drones?",o:["Stepper","BLDC","DC shunt","AC induction"],a:1,e:"BLDC motors provide high power-to-weight ratio and efficiency."},
+ {q:"Which motor is suitable for accurate incremental positioning?",o:["Stepper","DC motor","Universal motor","Induction motor"],a:0,e:"Stepper motors move in discrete angular steps."},
+ {q:"Which sensor provides rotor position feedback?",o:["Thermistor","Encoder","LDR","Strain gauge"],a:1,e:"An encoder provides position and speed information."},
+ {q:"What is the mechanical power equation?",o:["P=VI","P=Tω","P=IR","P=V/R"],a:1,e:"Mechanical power is torque multiplied by angular velocity."},
+ {q:"Which motor is preferred for industrial robotic arms?",o:["AC servo","Small DC motor","Unipolar stepper","Fan motor"],a:0,e:"Servo motors provide precise closed-loop motion control."},
+ {q:"What does a gearbox do?",o:["Increase voltage","Reduce speed and increase torque","Measure current","Generate PWM"],a:1,e:"A reduction gearbox trades speed for torque."}
+];
+let qi=0,score=0,answered=false;
+
+function loadQuestion(){
+ let q=questions[qi];
+ document.getElementById('question').innerHTML=
+ `<h3>Question ${qi+1} of ${questions.length}</h3><b>${q.q}</b>`;
+ document.getElementById('options').innerHTML=q.o.map((v,i)=>
+ `<label class="quiz-option"><input type="radio" name="answer" value="${i}" style="width:auto"> ${v}</label>`
+ ).join('');
+ document.getElementById('quizResult').innerHTML="Select an answer.";
+ answered=false;
+}
+function nextQuestion(){
+ if(!answered){
+  let chosen=document.querySelector('input[name="answer"]:checked');
+  if(!chosen){
+   document.getElementById('quizResult').innerHTML="Please select an answer.";
+   return;
+  }
+  let correct=Number(chosen.value)===questions[qi].a;
+  if(correct)score++;
+  document.getElementById('quizResult').innerHTML=
+   `${correct?"Correct!":"Incorrect."} ${questions[qi].e}`;
+  answered=true;
+  document.querySelectorAll('input[name="answer"]').forEach(x=>x.disabled=true);
+  return;
+ }
+ qi++;
+ if(qi>=questions.length){
+  document.getElementById('question').innerHTML="<h3>Assessment Completed!</h3>";
+  document.getElementById('options').innerHTML="";
+  document.getElementById('quizResult').innerHTML=
+  `Your score: ${score}/${questions.length} (${(score/questions.length*100).toFixed(1)}%). 
+  <br>Reload the page to try again.`;
+  document.querySelector('#quiz button');
+  return;
+ }
+ loadQuestion();
+}
+loadQuestion();
+</script>
+</body>
+</html>
